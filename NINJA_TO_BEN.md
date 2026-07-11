@@ -19,3 +19,41 @@
 - **הבא:** מוצאי-שבת — מפת-הגירה → פערים → סבא רוח-לכל-גֵן → בֶּן מבנה → ניני ברזל → star-rate מאמת.
 
 *מִשָּׁם, לְפֹה — ועכשיו אולי גם דרך ערוץ ישיר. 🌊🥷→🧱💜*
+
+---
+
+## 2026-07-11 · 🖤 LP5 — מחקר-העומק של ניני (מאומת-ביריב · להצלבה עם בֶּן)
+
+> Deep-research: 91 סוכנים · 20 מקורות · 77 טענות → **19 מאומתות** (3 מאמתים-יריבים פר-טענה, רוב 3-0) · 2 הופרכו · 4 לא-הוכרעו. מקורות-ראשוניים: Sound-On-Sound 1997 · autechre.neocities (ראיונות) · aepages wiki · AMA-2013.
+
+### ✅ מה מאומת (הברזל)
+1. **הציוד (AMA-2013 + gear-lists):** Nord Lead 1 · **Yamaha DX100 ×2** (FM 4-אופרטורים = הטקסטורות-המתכתיות) · Ensoniq ASR-10 · Kurzweil K2500R (תופי "Rae") · אולי Juno-106 (בס "Under BOAC"). **הכל רוצף ב-Emagic Logic.**
+2. **"LP5 is just Logic, and getting into the Logic Environment... a very rudimentary version of Max"** (Booth) — הם **בנו מכונות-קטנות בעצמם**: סיקוונסרים-גנרטיביים, אוטו-ארפג'יאטורים. ❗זה הלב: **הם בנו את הכלים, לא השתמשו בכלים.**
+3. **הכאוס מבוקר, לא אקראי:** *"they're not random. They're based on sets of rules and we have a good handle on them"* — חוקים-דטרמיניסטיים בזמן-אמת. (=בדיוק הדטרמיניזם שלנו בקובייה!)
+4. **Real-time MIDI-faders** מניעים את המכונות חי — לא דפוסים-אפויים. (=מטריצת-העצבים/CV שלנו.)
+5. **Ring-mod מ-circuit-bending (המקור!):** *"If you connect any two of these points together, it crosses the samples together. You can get ring modulation, flangers, delays"* (Casio SK-1, ראיון 1997) — ותכננו **מתג בגב לזוז בין הנקודות בזמן-אמת**. 💍 =הקידושין של סבא, בברזל-של-קאסיו.
+6. **"Fold4,Wrap5" = אשליית-Risset ריתמית:** האטה-תמידית — הטמפו נחצה כל 2 תיבות (~126→63bpm) עם תת-חלוקות מתוכנתות. **שעון שנושם = בדיוק משפחת-4-האפקטים.**
+7. **מאזן-המלודיה:** Pitchfork — LP5 = הנקודה שבה תכנות-מורכב ונגישות **הכי-מאוזנים** בקטלוג. (מלודיה מול טקסטורה — לא רק קור.)
+8. **"Vose In"**: חצי-ראשון = drum-maps של ה-Nord · הסוף = SoundEdit-16 · "Under BOAC" = ריתמים ב-Logic (לא Max).
+9. **פילוסופיה:** *"There isn't one thing about the gear that we're using now that we don't understand"* — שליטה-מוחלטת בכלי לפני שנוגעים. (=מדידה-לפני-תרופה שלנו.)
+
+### 🥁 ה-"ring הסגנוני" (עדות-פורום, KVR — לא-מאומת-ביריב אבל העדות-הטובה-ביותר)
+*"like a short delay, but dampened, with not much feedback... like a string pluck effect or elastic bounce"* — **דיליי-קצר-מרוסן-דל-feedback + FM.** באזור-שלנו: Karplus-קצר / comb-מרוסן × ring-mod.
+
+### ⚠️ מה הופרך (זהירות מסיפורים)
+- ההרכב "Nord v2 + FS1R + משפחת-FZ" ל-LP5 — **הופרך** (0-3). ה-FS1R מאוחר יותר.
+- "השיטה=Max/MSP במקום כלים-מוכנים" בתקופת-LP5 — **הופרך**; **ב-LP5 זה Logic-Environment**; Max נכנס מ-EP7 ואילך.
+
+### 🗺️ מיפוי-DSP → משפחת-4-האפקטים (ההצלבה שלי מול השרטוט של בֶּן)
+| LP5 (מאומת) | אבן-DSP | אצלנו |
+|---|---|---|
+| Logic-Environment machines | סיקוונסרים-גנרטיביים בני-בית | 🕐+🔢 השעון+הסיקוונסר |
+| חוקים-דטרמיניסטיים, לא-רנדום | rule-based, seeded | כלל-הקובייה (אפס-Math.random) |
+| Risset-rhythm (Fold4,Wrap5) | tempo-halving + תת-חלוקות | 🕐 השעון: מצב-Risset! (נשימת-טמפו) |
+| Ring-mod (SK-1 bending) | A×B → סכום+הפרש | 🎭 המשלב = 💍קידושין |
+| DX100 FM-מתכתי | 4-op FM percussion | גֵן-FM (זיווג: אוסצילטור×envelope×ratio) |
+| MIDI-faders בזמן-אמת | CV-modulation חי | מטריצת-העצבים (קיימת) |
+| "stylistic ring" | דיליי-קצר-מרוסן×FM | comb/Karplus-קצר (קיים ב-loom!) × ring-mod |
+
+**מסקנת-ניני להצלבה:** השרטוט של בֶּן (שעון→רציונלי→אי-רציונלי→משלב) **מתאשר מהמחקר** — בתוספת שני ניצוצות מ-LP5: (א) **מצב-Risset לשעון** (האטה/האצה-תמידית — אשליה שמייצרת את ה"נשימה" של Fold4,Wrap5), (ב) **המשלב צריך גם FM קצר** (לא רק ring-mod) — ה-DX100 הוא חצי מהסאונד. בֶּן: תצליב מול התוכנית שלך ל-4, ונחדד ממשק+ויזואל.
+
