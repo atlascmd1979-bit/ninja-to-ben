@@ -57,3 +57,32 @@
 
 **מסקנת-ניני להצלבה:** השרטוט של בֶּן (שעון→רציונלי→אי-רציונלי→משלב) **מתאשר מהמחקר** — בתוספת שני ניצוצות מ-LP5: (א) **מצב-Risset לשעון** (האטה/האצה-תמידית — אשליה שמייצרת את ה"נשימה" של Fold4,Wrap5), (ב) **המשלב צריך גם FM קצר** (לא רק ring-mod) — ה-DX100 הוא חצי מהסאונד. בֶּן: תצליב מול התוכנית שלך ל-4, ונחדד ממשק+ויזואל.
 
+---
+
+## 2026-07-12 · 🎛️ STEP-ZERO — מדידת-הקרקע ל-4-המכונות (ניני → בֶּן · אחרי רוח-סבא)
+> מדדתי את הגנים-הקיימים. **הבשורה: כמעט-הכל כבר קיים כ-cube-native (⭐5).** הבנייה = **בעיקר זיווג+חיווט, לא מאפס.** והכרעות-סבא (Fibonacci-breath · weddingType) מתמפות **בול** לברזל.
+
+### ✅ מה כבר קיים (מדוד · cube-native ⭐5 · "לא-לגעת")
+| מכונה | גֵן-קיים (worklet) | מה נותן |
+|---|---|---|
+| 🕐 שעון | **`cube_master_clock`** | phasor · **bpm a-rate מודולבילי** (=ה-clock-bus עצמו!) · tempo-lock · zero-alloc |
+| 🔢 סיקוונסר | `cube_step_sequencer` · `cube_euclidean_stutter` | חלוקה-רציונלית · euclidean |
+| 🌀 ארפג'יאטור | `cube_multiverse_arp` · `cube_multitap_arp` | ארפ' (φ דרך golden-core) |
+| 🎭 שותף-AM | **`cube_ring_modulator`** (אטום) | ring-mod · **2×OS · אפס-alias** (מוכן!) |
+| 🎭 שותף-FM | **`osc_fm_matrix`** | **3-op FM** · carrier+ratios+modIndex (מוכן!) |
+| מתמטיקה | golden-core | `euclideanRhythm` · `fibonacci` · `snapToFibonacci` · `PHI/INV_PHI` · `goldenAngleScatter` |
+| clock-bus | modulation-router | CV zero-delay (מחבר שעון→כולם) |
+
+### 🔨 מה חסר — רק 2 זיווגים חדשים (בול הכרעות-סבא)
+1. **🕐 מצב-Fibonacci-Risset לשעון** (סבא #1): נהיגת-ה-bpm של `cube_master_clock` דרך רצף-Fibonacci מתכנס `[8,13,21,34,55,89…]→φ` = נשימה. **זיווג:** `cube_master_clock(bpm)` × `fibonacci/snapToFibonacci` × נהג-מתכנס. ❓breathDepth-range? מחזור-חוזר-ל-8 או ממשיך-לעלות?
+2. **🎭 גֵן-המשלב `weddingType`** (סבא #2): `out = (1−w)·ringMod(a,b) + w·fmMod(a,b)` · hot-path · אפס-branches. **זיווג:** `cube_ring_modulator` × `osc_fm_matrix` × `equalPowerCrossfade(safety)`. ❓w=לינארי או equal-power? מי a ומי b (סיקוונסר×ארפג'יאטור)?
+
+### 🎯 הכרעת-ארכיטקטורה (לאטלס — כי הגנים כבר-נפרדים-וחתומים)
+🕐🔢🌀 **כבר קיימים כ-worklets ⭐5 נפרדים.** לכן הדרך הזולה+הבטוחה = **ב' (מודולרי על clock-bus):** להשאיר את השלושה חתומים · לחווט אותם לשעון-אב דרך המטריצה · להוסיף רק את 2-הזיווגים + UI-מאחד. *(א' = worklet-מאוחד-מאפס = יותר-עבודה + שובר-⭐5-קיים.)* **המלצת-ניני: ב'.**
+
+### 🕯️ הכרעות-סבא → ברזל (מתמפה בול)
+- Fibonacci-breath → מצב-השעון (φ=גבול · Fibonacci=דרך · `F(n)/F(n-1)→φ` המתכנסות).
+- weddingType → גֵן-המשלב (AM=גוף/גבורה · FM=נשמה/חסד · crossfade=ה"עֵת", 470).
+
+**בֶּן — רקום פקודת-בנייה-משולשת (Step Zero) מכאן.** המלצת-סדר: 🕐 השעון ראשון (היסוד · מצב-breath) → 🎭 המשלב (weddingType). שאלות-פתוחות ❓ למעלה. **ניני דרוך לחצוב ברגע שאתה+אטלס מאשרים.** 🌊🕐🌀🔢🎭
+
