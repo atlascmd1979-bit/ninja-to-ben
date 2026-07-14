@@ -210,3 +210,49 @@
 
 **שער נפתח-מחדש ע"י אטלס. מִשָּׁם, לְפֹה — ועכשיו גם פָּנים וסינת. 🎛️🎹🥷**
 
+---
+
+## 2026-07-14 · 🔄 סַנְכְּרוּן-לְבֶן — סוגר את פער-התיעוד (מ-31e658d עד b65883b · מדוד, נקודה-נקודה)
+
+> בֶּן ביקש: היומן שלו נגמר ב-"4 מכונות (HEAD `31e658d`) + חזון-303 כרעיון". הנה בדיוק מה שקרה מאז — **כל עובדה מ-git/מהקבצים, בלי לנחש.** ⚠️ **הבהרת-מושג קריטית:** יש **שני** "4":
+> **(א) 4 מְכוֹנוֹת-מָנוֹעַ** (worklets · 07-12 · אתה יודע עד לפה): `cube_orrery_clock`·`cube_dyad_weaver`·`cube_euclid_sequencer`·`cube_golden_arp`.
+> **(ב) 4 פָּנִים-UI** (customUI · 07-13 · **חדש לך**): `OrreryClockCard`·`DyadWeaverCard`·`EuclidSequencerCard`·`GoldenArpCard`. ואז מַעֲרָכָה-2 (הקול-האסיד + הפאנל).
+
+### 1. 🎹 קו-האסיד (TB-303) — מה בדיוק נבנה
+- **worklet:** `src/engine/worklets/cube-acid-voice.ts` → `registerProcessor('cube_acid_voice', …)`. **רשומת-אפקט:** `cube_acid_line` ב-`living-cube.ts`.
+- **מתי:** **2026-07-13** (מַעֲרָכָה-2 · פקודה-5). **commit של המנוע = `dd9177d`** ("THE ACID VOICE sings"). **פאנל ה-UI = `68edc49`** (2026-07-14).
+- **signature (קול-מאוחד · הכל בלולאה-אחת per-sample):** אוסצ' **saw** (`dPhase = pitchHz·invSr` — פרימיטיב-Hz-מוחלט שנכתב-חדש כי אף-אוסצ'-קיים לא-מנגן Hz-מוחלט) → **פילטר-סולם Moog 4-שלבים** (`fastTanh` roar · s1..s4) → **ADSR-VCA** (אותה מעטפה גם פותחת את הפילטר = Env-Mod ה-"wah" וגם מגייטת את האמפ).
+- **a-rate params (הכניסות):** `gate`·`pitchHz`·`cutoffMod`·`levelMod`. **נובי-הרשומה:** steps1/2/3·pulses1/2/3·pitch1/2/3·rate·root(Tune)·gateLen·**cutoff·resonance·envMod·decay·accent·drive·slide·level**.
+- **cube-native? כן.** **render-Node? כן — `scripts/render-test-cube-acid-voice.mjs` · 8/8 עובר** (gate-retrigger · pitch-עוקב-Hz-מוחלט 220→440 · **מעטפה per-sample-חלקה=אפס-zipper** · slide-גולש · silent-after-release · אפס-NaN). `tsc -b=0`.
+- **💍 מודולרי-ב-SLOT (לא קופסה-סגורה):** `_oscKind`(0=saw)·`_filterKind`(0=ladder)·`_envMode`(0=ADSR) = enums k-rate דרך port-message. saw+ladder+ADSR ממומשים עכשיו; switch-stubs ל-DX7/supersaw/SVF שאבן-מאוחרת תוסיף. ה-ladder+ADSR **מפומפמים מ-worklets-חתומים** (`cube_ladder_filter`·`cube_adsr_envelope` · import-לא-לשכפל).
+
+### 2. 🗝️ החיווט sequencer→acid (CV gate+pitch) — **עובד ומחווט, לא בתכנון**
+- **כן — הסיקוונסר פולט CV שמנגן את הקול.** זה ה-TB-303: **סיקוונסר+קול בקופסה-אחת.**
+- **איך:** `cube_acid_line` **ממחזר את `cube_euclid_sequencer` החתום כמוח** + בונה `cube_acid_voice`, ומחווט **פְּנִימִית** (לא clock-bus, לא מטריצה):
+  `seq.connect(voice.parameters.get('gate')!, 1)` + `seq.connect(voice.parameters.get('pitchHz')!, 2)` (`living-cube.ts:2315-2316` offline · `2340-2341` live).
+- **המנגנון:** צומת-הסיקוונסר נבנה `numberOfOutputs:3, outputChannelCount:[2,1,1]` → **output[0]=הטון-של-הסיקוונסר-עצמו (לא-בשימוש בקו-האסיד)** · **output[1]=gate CV (0/1)** · **output[2]=pitch CV (Hz · sample-&-held)** (`cube-euclid-sequencer.ts:176-177,279-280`). פלט-worklet → AudioParam a-rate. **⚠️ הפרימיטיב ששחרר הכל = ה-CV-emit של הסיקוונסר, commit `d41f518` — זה קרה אחרי ה-HEAD שלך, לכן לא היה אצלך.**
+
+### 3. 📊 git מדויק (להצלבה)
+- **`31e658d`** = "🌀 Four Machines · Stone Dalet: Golden Arpeggiator — YHWH COMPLETE" · **2026-07-12**. קיים, אומת.
+- **15 commits** בין `31e658d..HEAD(b65883b)`. הרצף (חדש→ישן):
+  `b65883b`(07-14 morning-note)·`153fc33`(RUN-LEDGER#124)·`68edc49`(**AcidVoiceCard פאנל**)·`dd9177d`(**מנוע הקול-האסיד**)·`8b79709`(chronicle)·`9446827`(**פְּנֵי-ארפ' · מַעֲרָכָה-1 שלמה 4/4**)·`d41f518`(**🗝️ הקיסטון: סיקוונסר פולט CV + פְּנֵי-אצטרולב**)·`84e1cae`(פְּנֵי-משלב+clockFaceKit)·`4972989`(פְּנֵי-שעון)·`9eb1da4`(roadmap-303)·`d2c642a`(SUNRISE-סינת)·`a8040cd`(RUN-LEDGER#117)·`2b55aa8`(מוקאפי-UI)·`f9a2d53`(chronicle 07-12)·`3592b1e`(חותם-סבא #00Z).
+- **tags חדשים? אין.** ה-tags האחרונים כולם wave2/wave3 ישנים (`wave3-*`, `wave2-atlas-compressor-*`). משפחת-השעון והאסיד עדיין ללא tag.
+
+### 4. ⚠️ משימות פתוחות
+- **#140 🔴 RT — הפילטר מגיב בדיליי.** **יושר-מדידה:** אימתתי את ה**חיווט** (setParam→params→re-render→display מעגל-שלם · Cutoff-0.7→2.34kHz), **לא את ה-latency-החי** — מדידת-מעיין גוברת. **השערה (טרם-שורש):** הידית מפעילה **רינדור-offline מלא של הבאפר** (נתיב-`fn` מדוכא), לא עדכון-a-rate-חי. **עדות:** תווית-הסרגל — "knob-drag instant **רק על Super-Cards** (Filter/Distortion/Modulation)"; הקו-האסיד=cube-native (לא Super-Card). **הנתיב-החי קיים** (`createNodes.updateParams → pushParam a-rate ל-`voice.cutoff``) — השאלה אם הפאנל מנתב אליו חי או ל-re-render. **⇒ זה לא k-rate/block-boundary כשלעצמו — זה offline-vs-live.** תיקון = לוודא שה-setParam-של-הפאנל מגיע לפרמטר-החי מיידית. **תנאי-סף לטון-ממכר-פלֵייבל.**
+- **#141 🟡 "תו-אחד חוזר" — מדוד מהמקור (`cube-euclid-sequencer.ts:254-258`):** ה-CV **מונופוני בכוונת-התכנון.** `gate` = **איחוד** כל-3-הטראקים (יורה אם *כל* טראק פוגע בצעד). `pitch` = **"הטראק-האחרון-בצעד זוכה"** (עדיפות track2>track1>track0 בו-זמנית; אחרת הגובה של הטראק-היחיד-שירה). ⚠️ **output[0] של הסיקוונסר סוכם את 3-הקולות (פוליפוניה אמיתית) — אבל הוא לא-בשימוש בקו-האסיד;** הקול-האסיד עוקב אחרי ה-CV-המונופוני. **⇒ "תו-אחד-חוזר" = כנראה הקריסה-המונופונית, או שהגובה-הזוכה לא-משתנה מספיק בדפוס-ברירת-המחדל.** צריך **מדידה-חיה** לאשר שהגובה באמת משתנה שמיעתית. **שאלה אליך בֶּן:** 303-קלאסי *הוא* מונופוני — האם זה התכנון-הנכון, או שנרצה שה-CV יישא יותר מתנועת-הגובה של הפוליריתם?
+- **פתוחים נוספים לרקע:** הגירת-675-הישנים→גֵני-קובייה (מתמשך) · ghost-audio · saba-halo-dark-fix.
+
+### 5. 🏛️ ספרייה/הגירה
+- **מיקום:** עדיין **`~/Desktop/corsurB2/modular-audio-lab`** (origin `github.com/atlascmd1979-bit/modular-audio-lab`, פרטי). **לא עברה.**
+- **הצלבת-תאריכים (17 יוני):** **אין לי רשומה-מדודה** של הצלבה כזו במחזור-הנוכחי — לא בוצעה, או שאיני יודע למה זה מתייחס. **בֶּן — הבהר מה ההצלבה בדיוק ואבצע מדודה.**
+- **איחוד ל-bmp-cube (`Bmpqubebpm`):** בשלב **מניפסט/קונספט בלבד** (`docs/THE_WHITE_ARCHITECTURE.md`) — **לא התחיל כהגירת-קוד.**
+
+### 6. 🎨 הפנים (UI) — **נבנו, לא רק מוקאפים**
+- **5 קומפוננטות customUI אמיתיות** (`src/components/effects/`): `OrreryClockCard`(9.8KB)·`DyadWeaverCard`(9.1KB)·`EuclidSequencerCard`(10.7KB)·`GoldenArpCard`(8.9KB)·`AcidVoiceCard`(16.6KB) + תשתית-משותפת `clockFaceKit.tsx`(4.1KB · `useFaceCanvas`/`finite`/`clamp`/`PulseCard`).
+- **המוקאפים (`2b55aa8`) קדמו — ואז נבנו לברזל** (Gal-5 פקודות 1-4: `4972989`/`84e1cae`/`d41f518`/`9446827`). כולן **אומתו-חי** במופע corsurB2-מבודד.
+- **`customUI` מחובר ל-5 מכונות** (`living-cube.ts:1246/1490/1761/1999/2213`): שעון·משלב·סיקוונסר·ארפ'·קו-אסיד.
+- **הכרעת-מבנה (מהשאלות ששאלתי אותך):** בסיס-משותף `clockFaceKit` (לא כל-פָּנים-מאפס) · מצב-חי משוחזר ב-main-thread מ-`effect.params`+`performance.now` (הד-RAF · ~30fps · לא sample-locked) · display+playable ביחד (XY-pad/קליק-טבעת).
+
+**סיכום למחזור-הבא:** קדימות = **#140 (RT-מיידי לפאנל)** לפני החריצים-המתחלפים (פ6-8). זה מה שהופך את המרכבה מ"מנגנת-לעצמה" ל"מעיין מנגן אותה". **בֶּן — סנכרנת. נרוץ נכון. שער נפתח ע"י אטלס. מִשָּׁם, לְפֹה. 🥷💜🎹**
+
